@@ -1,0 +1,18 @@
+{
+  "name": "spellhint",
+  "main": "./lib/spellhint",
+  "version": "0.0.0",
+  "description": "A short description of your package",
+  "keywords": [
+  ],
+  "activationCommands": {
+    "atom-workspace": "spellhint:toggle"
+  },
+  "repository": "https://github.com/atom/spellhint",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+  }
+}
