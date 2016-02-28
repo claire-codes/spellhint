@@ -25,9 +25,10 @@ module.exports = Spellhint =
     spellhintViewState: @spellhintView.serialize()
 
   toggle: ->
-    console.log 'Spellhint was toggled!'
-
     if @modalPanel.isVisible()
       @modalPanel.hide()
     else
+      editor = atom.workspace.getActiveTextEditor()
+      words = editor.getText().split(/\s+/).length
+      @spellhintView.setCount(words)
       @modalPanel.show()
