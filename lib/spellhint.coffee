@@ -28,9 +28,11 @@ module.exports = Spellhint =
     if @modalPanel.isVisible()
       @modalPanel.hide()
     else
-      lineno = 4
+      linenos = []
       editor = atom.workspace.getActiveTextEditor()
-      editor.scan /magneto/i, (o) -> lineno = o.range.end.row + 1
-      # lineno = foo[0]
-      @spellhintView.setCount(lineno)
+      editor.scan /magneto/i, (o) ->
+        console.log "I got a match " + (o.range.end.row + 1)
+        linenos.push(o.range.end.row + 1)
+      console.log "And now I've gone to sleep"
+      @spellhintView.setCount(linenos)
       @modalPanel.show()

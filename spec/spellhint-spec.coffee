@@ -50,6 +50,28 @@ describe "Spellhint", ->
         spellhintText = workspaceElement.querySelector('.message').innerHTML
         expect(spellhintText).toEqual 'There is a typo on line 1'
 
+    it "tests the content of a bigger view", ->
+      editor.setText('foo bar \nmagneto')
+      atom.commands.dispatch workspaceElement, 'spellhint:toggle'
+
+      waitsForPromise ->
+        activationPromise
+
+      runs ->
+        spellhintText = workspaceElement.querySelector('.message').innerHTML
+        expect(spellhintText).toEqual 'There is a typo on line 2'
+
+    it "shows two matches in modal", ->
+      editor.setText('foo bar \nmagneto\nblah\nmagneto')
+      atom.commands.dispatch workspaceElement, 'spellhint:toggle'
+
+      waitsForPromise ->
+        activationPromise
+
+      runs ->
+        spellhintText = workspaceElement.querySelector('.message').innerHTML
+        expect(spellhintText).toEqual 'There is a typo on line 2\nThere is a typo on line 4'
+
     it "hides and shows the view", ->
       # This test shows you an integration test testing at the view level.
 

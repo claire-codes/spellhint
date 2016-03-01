@@ -1,5 +1,5 @@
 SpellhintView = require '../lib/spellhint-view'
 
-describe "SpellhintView", ->
+xdescribe "SpellhintView", ->
   it "has one valid test", ->
     expect("life").toBe "easy"

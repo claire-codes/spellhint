@@ -21,6 +21,10 @@ class SpellhintView
   getElement: ->
     @element
 
-  setCount: (lineno) ->
-    displayText = "There is a typo on line #{lineno}"
+  addTypoMessagefor: (lineno) ->
+     "There is a typo on line #{lineno}"
+
+  setCount: (linenos) ->
+    displayText = ""
+    displayText += "There is a typo on line #{lineno}" for lineno in linenos
     @element.children[0].textContent = displayText
