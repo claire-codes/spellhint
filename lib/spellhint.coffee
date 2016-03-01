@@ -28,7 +28,9 @@ module.exports = Spellhint =
     if @modalPanel.isVisible()
       @modalPanel.hide()
     else
+      lineno = 4
       editor = atom.workspace.getActiveTextEditor()
-      words = editor.getText().split(/\s+/).length
-      @spellhintView.setCount(words)
+      editor.scan /magneto/i, (o) -> lineno = o.range.end.row + 1
+      # lineno = foo[0]
+      @spellhintView.setCount(lineno)
       @modalPanel.show()

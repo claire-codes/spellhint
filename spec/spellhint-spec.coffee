@@ -40,7 +40,7 @@ describe "Spellhint", ->
         expect(spellhintPanel.isVisible()).toBe false
 
     it "tests the content of the view", ->
-      editor.setText('foo bar')
+      editor.setText('foo bar magneto')
       atom.commands.dispatch workspaceElement, 'spellhint:toggle'
 
       waitsForPromise ->
@@ -48,7 +48,7 @@ describe "Spellhint", ->
 
       runs ->
         spellhintText = workspaceElement.querySelector('.message').innerHTML
-        expect(spellhintText).toEqual 'There are 2 words'
+        expect(spellhintText).toEqual 'There is a typo on line 1'
 
     it "hides and shows the view", ->
       # This test shows you an integration test testing at the view level.

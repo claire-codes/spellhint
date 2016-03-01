@@ -21,6 +21,6 @@ class SpellhintView
   getElement: ->
     @element
 
-  setCount: (count) ->
-    displayText = "There are #{count} words"
+  setCount: (lineno) ->
+    displayText = "There is a typo on line #{lineno}"
     @element.children[0].textContent = displayText
