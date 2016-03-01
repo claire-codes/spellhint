@@ -30,7 +30,7 @@ module.exports = Spellhint =
     else
       linenos = []
       editor = atom.workspace.getActiveTextEditor()
-      editor.scan /magneto/i, (o) ->
+      editor.scan /magneto/ig, (o) ->
         console.log "I got a match " + (o.range.end.row + 1)
         linenos.push(o.range.end.row + 1)
       console.log "And now I've gone to sleep"

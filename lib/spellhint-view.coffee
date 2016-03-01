@@ -26,5 +26,6 @@ class SpellhintView
 
   setCount: (linenos) ->
     displayText = ""
-    displayText += "There is a typo on line #{lineno}" for lineno in linenos
+    displayText += "There is a typo on line #{lineno}\n" for lineno in linenos
+    displayText = displayText.replace /\s+$/g, ""
     @element.children[0].textContent = displayText
