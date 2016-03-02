@@ -17,6 +17,7 @@ module.exports = Spellhint =
     @subscriptions.add atom.commands.add 'atom-workspace', 'spellhint:toggle': => @toggle()
 
   deactivate: ->
+    console.log "Deactivating"
     @modalPanel.destroy()
     @subscriptions.dispose()
     @spellhintView.destroy()
@@ -31,8 +32,6 @@ module.exports = Spellhint =
       linenos = []
       editor = atom.workspace.getActiveTextEditor()
       editor.scan /magneto/ig, (o) ->
-        console.log "I got a match " + (o.range.end.row + 1)
         linenos.push(o.range.end.row + 1)
-      console.log "And now I've gone to sleep"
       @spellhintView.setCount(linenos)
       @modalPanel.show()
