@@ -1,3 +1,4 @@
+path = require('path')
 SpellhintView = require './spellhint-view'
 {CompositeDisposable} = require 'atom'
 
@@ -30,9 +31,13 @@ module.exports = Spellhint =
     else
       linenos = []
       editor = atom.workspace.getActiveTextEditor()
-      editors = atom.workspace.getTextEditors()
-      for editor in editors
-        editor.scan /magneto/ig, (o) ->
-          linenos.push(o.range.end.row + 1)
-      @spellhintView.setCount(linenos)
+      allEditors = atom.workspace.getTextEditors()
+      for editor in allEditors
+        file = editor?.buffer?.file
+        if (file == null) then filename = 'untitled' else filename = path.basename(file?.path)
+        editor.scan /magneto/ig, (matchObj) ->
+          matchObj.lineno = matchObj.range.end.row + 1
+          matchObj.filename = filename
+          linenos.push(matchObj)
+      @spellhintView.setTypos(linenos)
       @modalPanel.show()

@@ -50,7 +50,7 @@ describe "Spellhint", ->
 
       runs ->
         spellhintText = workspaceElement.querySelector('.message').innerHTML
-        expect(spellhintText).toEqual 'There is a typo on line 1'
+        expect(spellhintText).toEqual 'There is a typo \'magneto\' in untitled on line 1'
 
     it "tests the content of a bigger view", ->
       editor.setText('foo bar \nmagneto')
@@ -61,7 +61,7 @@ describe "Spellhint", ->
 
       runs ->
         spellhintText = workspaceElement.querySelector('.message').innerHTML
-        expect(spellhintText).toEqual 'There is a typo on line 2'
+        expect(spellhintText).toEqual 'There is a typo \'magneto\' in untitled on line 2'
 
     it "shows two matches in modal", ->
       editor.setText('foo bar \nmagneto\nblah\nmagneto')

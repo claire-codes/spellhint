@@ -15,13 +15,14 @@ class SpellhintView
   getElement: ->
     @element
 
-  setCount: (linenos) ->
+  setTypos: (matchObj) ->
     @element.innerHTML = ""
-    @addMessage lineno for lineno in linenos
+    @addMessage match for match in matchObj
 
-  addMessage: (lineno) ->
+  addMessage: (match) ->
     # Create message element
     message = document.createElement('div')
-    message.textContent = "There is a typo on line #{lineno}"
+    console.log(match)
+    message.textContent = "There is a typo '#{match.matchText}' in #{match.filename} on line #{match.lineno}"
     message.classList.add('message')
     @element.appendChild(message)
