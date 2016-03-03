@@ -6,7 +6,7 @@ Spellhint = require '../lib/spellhint'
 # or `fdescribe`). Remove the `f` to unfocus the block.
 
 describe "Spellhint", ->
-  [workspaceElement, editor, activationPromise] = []
+  [workspaceElement, editor, editor2, activationPromise] = []
 
   beforeEach ->
     workspaceElement = atom.views.getView(atom.workspace)
@@ -14,6 +14,8 @@ describe "Spellhint", ->
     waitsForPromise ->
       atom.workspace.open().then (e) ->
         editor = e
+      atom.workspace.open().then (e) ->
+        editor2 = e
 
   describe "when the spellhint:toggle event is triggered", ->
     it "hides and shows the modal panel", ->
@@ -70,7 +72,21 @@ describe "Spellhint", ->
 
       runs ->
         spellhintText = workspaceElement.querySelector('.message').innerHTML
-        expect(spellhintText).toEqual 'There is a typo on line 2\nThere is a typo on line 4'
+        # expect(spellhintText).toEqual 'There is a typo on line 2\nThere is a typo on line 4'
+        expect(workspaceElement.querySelectorAll('.message').length).toEqual(2)
+
+    it "shows matches across all editors", ->
+      editor.setText('foo bar \nmagneto\nblah\nmagneto')
+      editor2.setText('magneto\nblah\nmagneto')
+      atom.commands.dispatch workspaceElement, 'spellhint:toggle'
+
+      waitsForPromise ->
+        activationPromise
+
+      runs ->
+        spellhintText = workspaceElement.querySelector('.message').innerHTML
+        # expect(spellhintText).toEqual 'There is a typo on line 2\nThere is a typo on line 4'
+        expect(workspaceElement.querySelectorAll('.message').length).toEqual(4)
 
     it "hides and shows the view", ->
       # This test shows you an integration test testing at the view level.

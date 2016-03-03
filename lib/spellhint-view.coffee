@@ -4,7 +4,6 @@ class SpellhintView
     # Create root element
     @element = document.createElement('div')
     @element.classList.add('spellhint')
-    console.log "Constructing"
 
   # Returns an object that can be retrieved when package is activated
   serialize: ->
@@ -17,8 +16,7 @@ class SpellhintView
     @element
 
   setCount: (linenos) ->
-    while @element.firstChild
-      @element.removeChild(@element.firstChild)
+    @element.innerHTML = ""
     @addMessage lineno for lineno in linenos
 
   addMessage: (lineno) ->
