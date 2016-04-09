@@ -16,6 +16,7 @@ module.exports = Spellhint =
 
     # Register command that toggles this view
     @subscriptions.add atom.commands.add 'atom-workspace', 'spellhint:toggle': => @toggle()
+    @subscriptions.add atom.commands.add 'atom-workspace', 'spellhint:close': => @close()
 
   deactivate: ->
     @modalPanel.destroy()
@@ -41,3 +42,7 @@ module.exports = Spellhint =
           linenos.push(matchObj)
       @spellhintView.setTypos(linenos)
       @modalPanel.show()
+
+  close: ->
+    if @modalPanel.isVisible()
+      @modalPanel.hide()
